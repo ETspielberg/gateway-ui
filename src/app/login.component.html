@@ -1,0 +1,26 @@
+  <div *ngIf="!authenticated" class="col-md-6 col-md-offset-3">
+    <h3>Login</h3>
+    <div class="panel-body">
+      <form (submit)="login(username,password)" (keyup.enter)="login(username,password)">
+        <div class="form-group">
+          <label for="username">Username:</label> <input type="text"
+                                                         class="form-control" id="username" name="username"
+                                                         [(ngModel)]="username"
+        autofocus />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label> <input type="password"
+                                                         class="form-control" id="password" name="password"
+                                                         [(ngModel)]="password" />
+        </div>
+        <button class="btn btn-success">Login</button>
+        <button class="btn btn-primary" routerLink="/register">Neu anmelden</button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="authenticated" class="col-md-6 col-md-offset-3">
+      <h3>Logout</h3>
+      <div id="logout-panel" class="panel-body">
+          <button class="btn btn-primary" (click)="logout()">Logout</button>
+      </div>
+  </div>
