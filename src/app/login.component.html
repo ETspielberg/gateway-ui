@@ -19,8 +19,18 @@
     </div>
   </div>
   <div *ngIf="authenticated" class="col-md-6 col-md-offset-3">
+    <div style="padding: 20px;" class="row">
+      <button *ngIf="fachreferent" class="btn btn-primary" onclick="window.location.href='/fachref'">Fachref-Assistent</button>
+
+      <button *ngIf="admin" class="btn btn-primary" onclick="window.location.href='/admin'">Administration</button>
+
+      <button *ngIf="media" class="btn btn-primary" onclick="window.location.href='/media'">Medien</button>
+      <button *ngIf="analyst" class="btn btn-primary" onclick="window.location.href='/bibliometrics'">DuEPublicA</button>
+    </div>
+    <div class="col-md-12">
       <h3>Logout</h3>
       <div id="logout-panel" class="panel-body">
           <button class="btn btn-primary" (click)="logout()">Logout</button>
       </div>
+    </div>
   </div>

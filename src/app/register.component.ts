@@ -45,9 +45,7 @@ export class RegisterComponent {
     if (!this.errors) {
     }
     this.authentificationService.register(new User(this.username, this.password)).subscribe(
-      data => {
-        this.router.navigate(['/start']);
-      },
+      data => window.location.href = '/fachref',
       error => this.inUse = true
     );
   }

@@ -1,5 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from './service/authentification.service';
 
 @Component({
@@ -10,28 +9,35 @@ import {AuthentificationService} from './service/authentification.service';
 export class LoginComponent implements OnInit {
 
   authenticated: boolean;
-
   private username: string;
-
   private password: string;
+  private admin: boolean;
+  private fachreferent: boolean;
+  private media: boolean;
+  private analyst: boolean;
 
-  constructor(private authentificationService: AuthentificationService, private router: Router) {
+  constructor(private authentificationService: AuthentificationService) {
   }
 
   ngOnInit(): void {
-    console.log(this.authentificationService.principal);
-    this.authentificationService.checkActiveUser().subscribe(
-      data => this.authenticated = true,
-      error => this.authenticated = false
-    );
+    this.admin = false;
+    this.fachreferent = false;
+    this.media = false;
+    this.analyst = false;
+    this.authenticated = this.authentificationService.isAuthenticated();
+    if (this.authenticated) {
+      this.updateAuthorities();
+    } else {
+      this.authenticated = false;
+    }
   }
 
   login() {
-    this.authentificationService.login(this.username, this.password).subscribe(
-      data => {
-        this.authenticated = true;
-      }
-    );
+    if (this.authentificationService.login(this.username, this.password) !== undefined) {
+        this.updateAuthorities();
+      } else {
+     this.authenticated = false;
+    }
   }
 
   logout() {
@@ -41,4 +47,16 @@ export class LoginComponent implements OnInit {
     this.authenticated = false;
   }
 
+  private updateAuthorities() {
+    this.authenticated = true;
+    console.log('authenticated');
+    this.admin = this.authentificationService.hasRole('admin');
+    console.log('admin');
+    this.fachreferent = this.authentificationService.hasRole('fachreferent');
+    console.log('fachreferent');
+    this.media = this.authentificationService.hasRole('media');
+    console.log('media');
+    this.analyst = this.authentificationService.hasRole('analyst');
+    console.log('analyst');
+  }
 }

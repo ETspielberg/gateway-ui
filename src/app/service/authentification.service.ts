@@ -13,32 +13,38 @@ export class AuthentificationService {
 
   public principal: Principal;
 
-  login(username: string, password: string): Observable<Principal> {
+  login(username: string, password: string): Principal {
     const token: string = 'Basic ' + btoa(username + ':' + password);
     const headers = new HttpHeaders().set('Authorization', token);
-    const observable  = this.http.get<Principal>('/activeuser', {headers : headers});
-      observable.subscribe(
+    this.http.get<Principal>('/activeuser', {headers : headers}).subscribe(
       data => {
         this.principal = data;
         console.log(this.principal);
       }
     );
-    return observable;
+    return this.principal;
   }
 
-  logout(): Observable<object> {
-    return this.http.post('/logout', {});
+  logout(): Observable<string> {
+    return this.http.post('/logout', {}, {responseType: 'text'});
   }
 
-  register(user: User): Observable<Principal> {
-    const observable  = this.http.post<Principal>('/register', JSON.stringify(user), {headers: appGlobals.headers});
-    observable.subscribe(
-      data => this.principal = data
+  register(user: User): Observable<string> {
+    return  this.http.post('/newUser',
+      {'username': user.username, 'password': user.password}, {responseType: 'text'});
+  }
+
+  isAuthenticated(): boolean {
+    this.http.get<Principal>('/activeuser').subscribe(
+      data => {
+        this.principal = data;
+        return !(this.principal === undefined);
+      }
     );
-    return observable;
+    return false;
   }
 
-  public checkActiveUser(): Observable<Principal> {
-    return this.http.get<Principal>('/activeuser');
+  hasRole(role: string): boolean {
+      return this.principal.roles && (this.principal.roles.indexOf('ROLE_' + role.toUpperCase()) > -1);
   }
 }
