@@ -13,16 +13,19 @@ export class AuthentificationService {
 
   public principal: Principal;
 
-  login(username: string, password: string): Principal {
+  public authenticated: boolean;
+
+  login(username: string, password: string): Observable<Principal> {
     const token: string = 'Basic ' + btoa(username + ':' + password);
     const headers = new HttpHeaders().set('Authorization', token);
-    this.http.get<Principal>('/activeuser', {headers : headers}).subscribe(
+    const observable = this.http.get<Principal>('/activeuser', {headers : headers});
+      observable.subscribe(
       data => {
         this.principal = data;
         console.log(this.principal);
       }
     );
-    return this.principal;
+    return observable;
   }
 
   logout(): Observable<string> {
@@ -34,14 +37,14 @@ export class AuthentificationService {
       {'username': user.username, 'password': user.password}, {responseType: 'text'});
   }
 
-  isAuthenticated(): boolean {
-    this.http.get<Principal>('/activeuser').subscribe(
+  updatePrincipal(): Observable<Principal> {
+    const observable = this.http.get<Principal>('/activeuser');
+    observable.subscribe(
       data => {
         this.principal = data;
-        return !(this.principal === undefined);
-      }
+      },
     );
-    return false;
+    return observable;
   }
 
   hasRole(role: string): boolean {

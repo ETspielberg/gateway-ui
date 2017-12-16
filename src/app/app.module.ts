@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RegisterComponent} from './register.component';
 import {LoginComponent} from './login.component';
 import {AuthentificationService} from './service/authentification.service';
+import {ButtonModule, InputTextModule} from "primeng/primeng";
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import {AuthentificationService} from './service/authentification.service';
     AppComponent, LoginComponent, RegisterComponent
   ],
   imports: [
+    ButtonModule,
+    InputTextModule,
     FormsModule,
     HttpClientModule,
     BrowserModule,

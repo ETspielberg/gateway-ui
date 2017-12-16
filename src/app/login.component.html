@@ -1,36 +1,76 @@
-  <div *ngIf="!authenticated" class="col-md-6 col-md-offset-3">
-    <h3>Login</h3>
-    <div class="panel-body">
-      <form (submit)="login(username,password)" (keyup.enter)="login(username,password)">
-        <div class="form-group">
-          <label for="username">Username:</label> <input type="text"
-                                                         class="form-control" id="username" name="username"
-                                                         [(ngModel)]="username"
-        autofocus />
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label> <input type="password"
-                                                         class="form-control" id="password" name="password"
-                                                         [(ngModel)]="password" />
-        </div>
-        <button class="btn btn-success">Login</button>
-        <button class="btn btn-primary" routerLink="/register">Neu anmelden</button>
-      </form>
-    </div>
-  </div>
-  <div *ngIf="authenticated" class="col-md-6 col-md-offset-3">
-    <div style="padding: 20px;" class="row">
-      <button *ngIf="fachreferent" class="btn btn-primary" onclick="window.location.href='/fachref'">Fachref-Assistent</button>
-
-      <button *ngIf="admin" class="btn btn-primary" onclick="window.location.href='/admin'">Administration</button>
-
-      <button *ngIf="media" class="btn btn-primary" onclick="window.location.href='/media'">Medien</button>
-      <button *ngIf="analyst" class="btn btn-primary" onclick="window.location.href='/bibliometrics'">DuEPublicA</button>
-    </div>
-    <div class="col-md-12">
-      <h3>Logout</h3>
-      <div id="logout-panel" class="panel-body">
-          <button class="btn btn-primary" (click)="logout()">Logout</button>
+<div *ngIf="!authenticated" class="ui-g">
+  <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+    <div class="tile">
+      <h3>Login</h3>
+      <div class="panel-body">
+        <form (submit)="login(username,password)" (keyup.enter)="login(username,password)">
+          <div class="form-group">
+            <span class="ui-float-label">
+              <input id="username-input" type="text" size="30" pInputText [(ngModel)]="username" [ngModelOptions]="{standalone: true}" autofocus
+                     class="form-control">
+              <label for="username-input">Benutzerkennung</label>
+            </span>
+          </div>
+          <div class="form-group">
+            <span class="ui-float-label">
+              <input id="password-input" type="password" size="30" pInputText [(ngModel)]="password" [ngModelOptions]="{standalone: true}" autofocus
+                     class="form-control">
+              <label for="password-input">Passwort</label>
+            </span>
+          </div>
+          <button class="btn btn-success">Login</button>
+          <button class="btn btn-primary" routerLink="/register">Neu anmelden</button>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="authenticated" class="container">
+  <div class="ui-g">
+    <div *ngIf="fachreferent" class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>Fachref-Assistent</h3>
+        <p>Fachref-Assistent</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/fachref'"
+                label="zum Fachref-Assistent" icon="fa-angle-double-right" iconPos="right">
+        </button>
+      </div>
+    </div>
+    <div *ngIf="admin" class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>Administration</h3>
+        <p>Administration</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/admin'"
+                label="zur Administration" icon="fa-angle-double-right" iconPos="right"></button>
+      </div>
+    </div>
+    <div *ngIf="media" class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>Medien-Management</h3>
+        <p>Medien-Management</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/media'"
+                label="zum Medien-Management" icon="fa-angle-double-right" iconPos="right">
+        </button>
+      </div>
+    </div>
+    <div *ngIf="analyst" class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>DuEPublicA</h3>
+        <p>DuEPublicA</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/bibliometrics'"
+                label="zu DuEPublicA" icon="fa-angle-double-right" iconPos="right">
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-2 ui-md-offset-5">
+      <div class="tile">
+        <h3>Logout</h3>
+        <button pButton type="button" class="ui-button-danger" (click)="logout()" label="Logout"
+                icon="fa-angle-double-right" iconPos="right"></button>
+      </div>
+    </div>
+  </div>
+</div>

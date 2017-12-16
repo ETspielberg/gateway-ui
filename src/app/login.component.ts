@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from './service/authentification.service';
+import {Principal} from './model/Principal';
 
 @Component({
   selector: 'app-login',
@@ -15,29 +16,37 @@ export class LoginComponent implements OnInit {
   private fachreferent: boolean;
   private media: boolean;
   private analyst: boolean;
+  private principal: Principal;
 
   constructor(private authentificationService: AuthentificationService) {
   }
 
   ngOnInit(): void {
+    this.authenticated = false;
     this.admin = false;
     this.fachreferent = false;
     this.media = false;
     this.analyst = false;
-    this.authenticated = this.authentificationService.isAuthenticated();
-    if (this.authenticated) {
-      this.updateAuthorities();
-    } else {
-      this.authenticated = false;
-    }
+    this.authentificationService.updatePrincipal().subscribe(
+      data => {
+        this.principal = data;
+        console.log(this.principal);
+        if (this.principal !== null) {
+          this.updateAuthorities();
+        }
+      }
+    );
   }
 
   login() {
-    if (this.authentificationService.login(this.username, this.password) !== undefined) {
-        this.updateAuthorities();
-      } else {
-     this.authenticated = false;
-    }
+    this.authentificationService.login(this.username, this.password).subscribe(
+      data => {
+        this.principal = data;
+        if (this.principal !== undefined) {
+          this.updateAuthorities();
+        }
+      }
+      );
   }
 
   logout() {

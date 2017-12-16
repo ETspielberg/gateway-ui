@@ -21,7 +21,10 @@
       "styles": [
         "assets/css/bootstrap.css",
         "assets/css/jumbotron.css",
-        "styles.css"
+        "assets/css/styles.css",
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
