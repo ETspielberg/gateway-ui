@@ -43,10 +43,10 @@ export class RegisterComponent {
     }
     this.errors = !( this.passwordValid && this.passwordsMatch && this.usernameValid);
     if (!this.errors) {
+      this.authentificationService.register(new User(this.username, this.password)).subscribe(
+        data => window.location.href = '/fachref',
+        error => this.inUse = true
+      );
     }
-    this.authentificationService.register(new User(this.username, this.password)).subscribe(
-      data => window.location.href = '/fachref',
-      error => this.inUse = true
-    );
   }
 }

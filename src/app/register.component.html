@@ -1,11 +1,18 @@
-<div class="alert alert-danger" *ngIf="errors">
-  <p>Es gab ein Problem:</p>
-  <p *ngIf="!passwordsMatch">Die eingegebenen Passwörter stimmen nicht überein.</p>
-  <p *ngIf="!passwordValid">Das eingegebene Passwort ist ungültig.</p>
-  <p *ngIf="!usernameValid">Der angegebene Nutzername ist ungültig.</p>
-  <p *ngIf="inUse">Der angebene Nutzername ist bereits vergeben.</p>
+<div *ngIf="errors" class="ui-g">
+  <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+    <div class="alert alert-danger">
+      <p>Es gab ein Problem:</p>
+      <p *ngIf="!passwordsMatch">Die eingegebenen Passwörter stimmen nicht überein.</p>
+      <p *ngIf="!passwordValid">Das eingegebene Passwort ist ungültig.</p>
+      <p *ngIf="!usernameValid">Der angegebene Nutzername ist ungültig.</p>
+      <p *ngIf="inUse">Der angebene Nutzername ist bereits vergeben.</p>
+    </div>
+
+  </div>
 </div>
-<div class="col-md-6 col-md-offset-3">
+<div class="ui-g">
+<div class="ui-g-12 ui-md-6 ui-md-offset-3">
+  <div class="tile">
   <h3>Anmeldung</h3>
   <div class="panel-body">
     <form (submit)="register()">
@@ -31,6 +38,9 @@
             </span>
     </div>
     <button class="btn btn-primary">Anmelden</button>
+    <button class="btn btn-danger" routerLink="/login">Zurück</button>
   </form>
   </div>
+  </div>
+</div>
 </div>

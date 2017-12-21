@@ -17,7 +17,8 @@ export class AuthentificationService {
 
   login(username: string, password: string): Observable<Principal> {
     const token: string = 'Basic ' + btoa(username + ':' + password);
-    const headers = new HttpHeaders().set('Authorization', token);
+    let headers = new HttpHeaders().set('Authorization', token);
+    headers = headers.append('X-Requested-With', 'XMLHttpRequest');
     const observable = this.http.get<Principal>('/activeuser', {headers : headers});
       observable.subscribe(
       data => {
