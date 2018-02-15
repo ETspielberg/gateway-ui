@@ -1,13 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from './service/authentification.service';
 import {Router} from '@angular/router';
 import {User} from './model/User';
+import {Usersettings} from './model/Usersettings';
+import {UserService} from './service/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: 'register.component.html'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
   public username: string;
 
@@ -25,7 +27,13 @@ export class RegisterComponent {
 
   public passwordCheck: string;
 
-  constructor(private authentificationService: AuthentificationService, private router: Router) {
+  public usersettings: Usersettings;
+
+  constructor(private authentificationService: AuthentificationService, private userService: UserService, private router: Router) {
+  }
+
+  ngOnInit() {
+   this.usersettings = new Usersettings('', '', '');
   }
 
   register() {
@@ -41,11 +49,22 @@ export class RegisterComponent {
     if (this.username === undefined) {
       this.usernameValid = false;
     }
-    this.errors = !( this.passwordValid && this.passwordsMatch && this.usernameValid);
+    this.errors = !(this.passwordValid && this.passwordsMatch && this.usernameValid);
     if (!this.errors) {
       this.authentificationService.register(new User(this.username, this.password)).subscribe(
-        data => window.location.href = '/fachref',
-        error => this.inUse = true
+        data => {
+          this.usersettings.username = this.username;
+          this.userService.create(this.usersettings).subscribe(
+            () => {
+              this.authentificationService.login(this.username, this.password).subscribe(
+                () => window.location.href = '/');
+            }
+          );
+        },
+        error => {
+          this.inUse = true;
+          this.errors = true;
+        }
       );
     }
   }

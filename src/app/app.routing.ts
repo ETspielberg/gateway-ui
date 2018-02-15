@@ -6,6 +6,7 @@ import {ModuleWithProviders} from '@angular/core';
 const routes: Routes = [
   {path : 'login', component: LoginComponent},
   {path : 'register', component: RegisterComponent},
+  {path : 'usersettings', loadChildren: 'app/usersettings/usersettings.module#UsersettingsModule'},
   {path : '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

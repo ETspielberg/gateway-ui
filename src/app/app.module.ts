@@ -10,6 +10,7 @@ import {RegisterComponent} from './register.component';
 import {LoginComponent} from './login.component';
 import {AuthentificationService} from './service/authentification.service';
 import {ButtonModule, InputTextModule} from "primeng/primeng";
+import {UserService} from "./service/user.service";
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import {ButtonModule, InputTextModule} from "primeng/primeng";
     BrowserModule,
     appRouting
   ],
-  providers: [HttpClientModule, AuthentificationService],
+  providers: [HttpClientModule, AuthentificationService, UserService],
   exports: [LoginComponent, RegisterComponent],
   bootstrap: [AppComponent]
 })

@@ -6,14 +6,16 @@
         <form (submit)="login(username,password)" (keyup.enter)="login(username,password)">
           <div class="form-group">
             <span class="ui-float-label">
-              <input id="username-input" type="text" size="30" pInputText [(ngModel)]="username" [ngModelOptions]="{standalone: true}" autofocus
+              <input id="username-input" type="text" size="30" pInputText [(ngModel)]="username"
+                     [ngModelOptions]="{standalone: true}" autofocus
                      class="form-control">
               <label for="username-input">Benutzerkennung</label>
             </span>
           </div>
           <div class="form-group">
             <span class="ui-float-label">
-              <input id="password-input" type="password" size="30" pInputText [(ngModel)]="password" [ngModelOptions]="{standalone: true}" autofocus
+              <input id="password-input" type="password" size="30" pInputText [(ngModel)]="password"
+                     [ngModelOptions]="{standalone: true}" autofocus
                      class="form-control">
               <label for="password-input">Passwort</label>
             </span>
@@ -24,14 +26,40 @@
       </div>
     </div>
   </div>
+  <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+    <div class="tile">
+      <h3>direkt zum Ausleihprotokoll</h3>
+      <button pButton type="button" class="ui-button-success" onclick="window.location.href='/protokoll'"
+              label="zum Ausleihprotokoll" icon="fa-angle-double-right" iconPos="right"></button>
+    </div>
+  </div>
 </div>
 
 <div *ngIf="authenticated" class="container">
   <div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>Eigene Einstellungen</h3>
+        <p>Eine Reihe an eigenen Einstellungen</p>
+
+        <button pButton type="button" class="ui-button-success" routerLink="/usersettings"
+                label="zu den Einstellungen" icon="fa-angle-double-right" iconPos="right">
+        </button>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>Ausleihprotokoll</h3>
+        <p>Dashboard zur Detailanalyse eines Titels.</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/protokoll'"
+                label="zum Ausleihprotokoll" icon="fa-angle-double-right" iconPos="right">
+        </button>
+      </div>
+    </div>
     <div *ngIf="fachreferent" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
         <h3>Fachref-Assistent</h3>
-        <p>Fachref-Assistent</p>
+        <p>Instrumente zum Bestandsmanagement.</p>
         <button pButton type="button" class="ui-button-success" onclick="window.location.href='/fachref'"
                 label="zum Fachref-Assistent" icon="fa-angle-double-right" iconPos="right">
         </button>
@@ -40,7 +68,7 @@
     <div *ngIf="admin" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
         <h3>Administration</h3>
-        <p>Administration</p>
+        <p>Eisntellungen und Nutzer verwalten</p>
         <button pButton type="button" class="ui-button-success" onclick="window.location.href='/admin'"
                 label="zur Administration" icon="fa-angle-double-right" iconPos="right"></button>
       </div>
