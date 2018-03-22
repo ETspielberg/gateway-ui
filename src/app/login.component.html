@@ -30,7 +30,7 @@
 
   <div class="ui-g-12 ui-md-8 ui-md-offset-2">
     <div class="tile">
-      <h3>direkt zum Ausleihprotokoll</h3>
+      <h3>{{'protokoll' | translate}}</h3>
       <button pButton type="button" class="ui-button-success" onclick="window.location.href='/protokoll'"
               label="zum Ausleihprotokoll" icon="fa-search"></button>
     </div>
@@ -41,18 +41,18 @@
   <div class="ui-g">
     <div class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
-        <h3>Eigene Einstellungen</h3>
-        <p>Eine Reihe an eigenen Einstellungen</p>
+        <h3>{{'settings' | translate}}</h3>
+        <p>{{'settings.short' | translate}}</p>
 
         <button pButton type="button" class="ui-button-success" routerLink="/usersettings"
-                label="zu den Einstellungen" icon="fa-angle-double-right" iconPos="right">
+                label="zu den Einstellungen" icon="fa-user" iconPos="right">
         </button>
       </div>
     </div>
     <div class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
-        <h3>Ausleihprotokoll</h3>
-        <p>Dashboard zur Detailanalyse eines Titels.</p>
+        <h3>{{'protokoll' | translate}}</h3>
+        <p>{{'protokoll.short' | translate}}</p>
         <button pButton type="button" class="ui-button-success" onclick="window.location.href='/protokoll'"
                 label="zum Ausleihprotokoll" icon="fa-angle-double-right" iconPos="right">
         </button>
@@ -60,36 +60,36 @@
     </div>
     <div *ngIf="roles['fachreferent']" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
-        <h3>Fachref-Assistent</h3>
-        <p>Instrumente zum Bestandsmanagement.</p>
+        <h3>{{'fachref' | translate}}</h3>
+        <p>{{'fachref' | translate}}</p>
         <button pButton type="button" class="ui-button-success" onclick="window.location.href='/fachref'"
-                label="zum Fachref-Assistent" icon="fa-angle-double-right" iconPos="right">
+                label="zum Fachref-Assistent" icon="fa-list" iconPos="right">
         </button>
       </div>
     </div>
     <div *ngIf="roles['admin']" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
-        <h3>Administration</h3>
-        <p>Eisntellungen und Nutzer verwalten</p>
+        <h3>{{'admin' | translate}}</h3>
+        <p>{{'admin.short' | translate}}</p>
         <button pButton type="button" class="ui-button-success" onclick="window.location.href='/admin'"
-                label="zur Administration" icon="fa-angle-double-right" iconPos="right"></button>
+                label="zur Administration" icon="fa-user-secret" iconPos="right"></button>
       </div>
     </div>
     <div *ngIf="roles['media']" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
-        <h3>Medien-Management</h3>
-        <p>Medien-Management</p>
+        <h3>{{'media' | translate}}</h3>
+        <p>{{'media.short' | translate}}</p>
         <button pButton type="button" class="ui-button-success" onclick="window.location.href='/media'"
-                label="zum Medien-Management" icon="fa-angle-double-right" iconPos="right">
+                label="zum Medien-Management" icon="fa-cog" iconPos="right">
         </button>
       </div>
     </div>
     <div *ngIf="roles['analyst']" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
-        <h3>DuEPublicA</h3>
-        <p>DuEPublicA</p>
+        <h3>{{'duepublica' | translate}}</h3>
+        <p>{{'duepublica.short' | translate}}</p>
         <button pButton type="button" class="ui-button-success" onclick="window.location.href='/bibliometrics'"
-                label="zu DuEPublicA" icon="fa-angle-double-right" iconPos="right">
+                label="zu DuEPublicA" icon="fa-chart-bar" iconPos="right">
         </button>
       </div>
     </div>
@@ -99,7 +99,7 @@
       <div class="tile">
         <h3>Logout</h3>
         <button pButton type="button" class="ui-button-danger" (click)="logout()" label="Logout"
-                icon="fa-angle-double-right" iconPos="right"></button>
+                icon="fa-sign-out" iconPos="right"></button>
       </div>
     </div>
   </div>
