@@ -2,6 +2,7 @@
   <div class="ui-g-12 ui-md-6 ui-md-offset-3">
     <div class="tile">
       <h3>Login</h3>
+      <p-messages [(value)]="messages" [closable]="false"></p-messages>
       <div class="panel-body">
         <form (submit)="login(username,password)" (keyup.enter)="login(username,password)">
           <div class="form-group">
@@ -26,6 +27,7 @@
       </div>
     </div>
   </div>
+
   <div class="ui-g-12 ui-md-6 ui-md-offset-3">
     <div class="tile">
       <h3>direkt zum Ausleihprotokoll</h3>

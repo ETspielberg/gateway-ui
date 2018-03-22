@@ -9,7 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RegisterComponent} from './register.component';
 import {LoginComponent} from './login.component';
 import {AuthentificationService} from './service/authentification.service';
-import {ButtonModule, InputTextModule} from "primeng/primeng";
+import {ButtonModule, InputTextModule, MessagesModule} from "primeng/primeng";
 import {UserService} from "./service/user.service";
 
 
@@ -20,6 +20,7 @@ import {UserService} from "./service/user.service";
   imports: [
     ButtonModule,
     InputTextModule,
+    MessagesModule,
     FormsModule,
     HttpClientModule,
     BrowserModule,

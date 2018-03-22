@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from './service/authentification.service';
 import {Principal} from './model/Principal';
+import {Message} from "primeng/primeng";
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   private media: boolean;
   private analyst: boolean;
   private principal: Principal;
+  public messages: Message[];
 
   constructor(private authentificationService: AuthentificationService) {
   }
@@ -45,6 +47,13 @@ export class LoginComponent implements OnInit {
         if (this.principal !== undefined) {
           this.updateAuthorities();
         }
+      }, error => {
+        this.messages = [];
+        console.log('could not authenticate user ' + this.username);
+        this.messages.push({
+          severity: 'error', summary: 'Fehler: ',
+          detail: 'Anmeldung fehlgeschlagen. Bitte Nutzerkennung und Passwort prüfen.'
+        });
       }
       );
   }
