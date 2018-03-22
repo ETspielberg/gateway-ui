@@ -1,19 +1,10 @@
-<div *ngIf="errors" class="ui-g">
-  <div class="ui-g-12 ui-md-6 ui-md-offset-3">
-    <div class="alert alert-danger">
-      <p>Es gab ein Problem:</p>
-      <p *ngIf="!passwordsMatch">Die eingegebenen Passwörter stimmen nicht überein.</p>
-      <p *ngIf="!passwordValid">Das eingegebene Passwort ist ungültig.</p>
-      <p *ngIf="!usernameValid">Der angegebene Nutzername ist ungültig.</p>
-      <p *ngIf="inUse">Der angebene Nutzername ist bereits vergeben.</p>
-    </div>
 
-  </div>
 </div>
 <div class="ui-g">
 <div class="ui-g-12 ui-md-6 ui-md-offset-3">
   <div class="tile">
   <h3>Neu-Anmeldung</h3>
+    <p-messages [(value)]="messages" [closable]="false"></p-messages>
   <div class="panel-body">
     <form (submit)="register()">
     <div class="form-group">

@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {User} from './model/User';
 import {Usersettings} from './model/Usersettings';
 import {UserService} from './service/user.service';
+import {Message} from "primeng/primeng";
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,8 @@ export class RegisterComponent implements OnInit {
 
   public usersettings: Usersettings;
 
+  public messages: Message[];
+
   constructor(private authentificationService: AuthentificationService, private userService: UserService, private router: Router) {
   }
 
@@ -40,14 +43,27 @@ export class RegisterComponent implements OnInit {
     this.passwordsMatch = true;
     this.passwordValid = true;
     this.usernameValid = true;
+    this.messages = [];
     if (this.password !== this.passwordCheck) {
       this.passwordsMatch = false;
+      this.messages.push({
+        severity: 'error', summary: 'Registrierung  fehlgeschlagen. ',
+        detail: ' Die eingegebenen Passwörter stimmen nicht überein.'
+      });
     }
     if (this.password === undefined) {
       this.passwordValid = false;
+      this.messages.push({
+        severity: 'error', summary: 'Registrierung  fehlgeschlagen.',
+        detail: 'Das eingegebene Passwort ist ungültig.'
+      });
     }
     if (this.username === undefined) {
       this.usernameValid = false;
+      this.messages.push({
+        severity: 'error', summary: 'Registrierung  fehlgeschlagen.',
+        detail: 'Der angegebene Nutzername ist ungültig.'
+      });
     }
     this.errors = !(this.passwordValid && this.passwordsMatch && this.usernameValid);
     if (!this.errors) {
@@ -62,7 +78,10 @@ export class RegisterComponent implements OnInit {
           );
         },
         error => {
-          this.inUse = true;
+          this.messages.push({
+            severity: 'error', summary: 'Registrierung  fehlgeschlagen.',
+            detail: 'er angebene Nutzername ist bereits vergeben.'
+          });
           this.errors = true;
         }
       );
