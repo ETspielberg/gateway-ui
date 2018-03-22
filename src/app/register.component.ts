@@ -5,6 +5,7 @@ import {User} from './model/User';
 import {Usersettings} from './model/Usersettings';
 import {UserService} from './service/user.service';
 import {Message} from "primeng/primeng";
+import {TranslateService} from "./translate";
 
 @Component({
   selector: 'app-register',
@@ -14,16 +15,6 @@ export class RegisterComponent implements OnInit {
 
   public username: string;
 
-  public passwordsMatch: boolean;
-
-  public passwordValid: boolean;
-
-  public usernameValid: boolean;
-
-  public inUse: boolean;
-
-  public errors: boolean;
-
   public password: string;
 
   public passwordCheck: string;
@@ -32,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
   public messages: Message[];
 
-  constructor(private authentificationService: AuthentificationService, private userService: UserService, private router: Router) {
+  constructor(private authentificationService: AuthentificationService, private userService: UserService, private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -40,33 +31,32 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.passwordsMatch = true;
-    this.passwordValid = true;
-    this.usernameValid = true;
+    let passwordsMatch = true;
+    let passwordValid = true;
+    let usernameValid = true;
     this.messages = [];
     if (this.password !== this.passwordCheck) {
-      this.passwordsMatch = false;
+      passwordsMatch = false;
       this.messages.push({
-        severity: 'error', summary: 'Registrierung  fehlgeschlagen. ',
-        detail: ' Die eingegebenen Passwörter stimmen nicht überein.'
+        severity: 'error', summary: this.translateService.instant('error.noMatchingPasswords.summary'),
+        detail: this.translateService.instant('error.noMatchingPasswords.detail')
       });
     }
     if (this.password === undefined) {
-      this.passwordValid = false;
+      passwordValid = false;
       this.messages.push({
-        severity: 'error', summary: 'Registrierung  fehlgeschlagen.',
-        detail: 'Das eingegebene Passwort ist ungültig.'
+        severity: 'error', summary: this.translateService.instant('error.noPassword.summary'),
+        detail: this.translateService.instant('error.noPassword.detail')
       });
     }
     if (this.username === undefined) {
-      this.usernameValid = false;
+      usernameValid = false;
       this.messages.push({
-        severity: 'error', summary: 'Registrierung  fehlgeschlagen.',
-        detail: 'Der angegebene Nutzername ist ungültig.'
+        severity: 'error', summary: this.translateService.instant('error.noUsername.summary'),
+        detail: this.translateService.instant('error.noUsername.detail')
       });
     }
-    this.errors = !(this.passwordValid && this.passwordsMatch && this.usernameValid);
-    if (!this.errors) {
+    if (passwordValid && passwordsMatch && usernameValid) {
       this.authentificationService.register(new User(this.username, this.password)).subscribe(
         data => {
           this.usersettings.username = this.username;
@@ -79,10 +69,9 @@ export class RegisterComponent implements OnInit {
         },
         error => {
           this.messages.push({
-            severity: 'error', summary: 'Registrierung  fehlgeschlagen.',
-            detail: 'er angebene Nutzername ist bereits vergeben.'
+            severity: 'error', summary: this.translateService.instant('error.register.summary'),
+            detail: this.translateService.instant('error.register.detail')
           });
-          this.errors = true;
         }
       );
     }

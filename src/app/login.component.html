@@ -1,5 +1,5 @@
-<div *ngIf="!authenticated" class="ui-g">
-  <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+<div *ngIf="!roles['authenticated']" class="ui-g">
+  <div class="ui-g-12 ui-md-8 ui-md-offset-2">
     <div class="tile">
       <h3>Login</h3>
       <p-messages [(value)]="messages" [closable]="false"></p-messages>
@@ -10,7 +10,7 @@
               <input id="username-input" type="text" size="30" pInputText [(ngModel)]="username"
                      [ngModelOptions]="{standalone: true}" autofocus
                      class="form-control">
-              <label for="username-input">Benutzerkennung</label>
+              <label for="username-input">{{'username' | translate}}</label>
             </span>
           </div>
           <div class="form-group">
@@ -18,26 +18,26 @@
               <input id="password-input" type="password" size="30" pInputText [(ngModel)]="password"
                      [ngModelOptions]="{standalone: true}" autofocus
                      class="form-control">
-              <label for="password-input">Passwort</label>
+              <label for="password-input">{{'password' | translate}}</label>
             </span>
           </div>
-          <button class="btn btn-success">Login</button>
-          <button class="btn btn-primary" routerLink="/register">Neu anmelden</button>
+          <button pButton type="button" class="ui-button-success" label="Login" (click)="login()" icon="fa-sign-in"></button>
+          <button pButton type="button" class="ui-button" routerLink="/register" label="{{'register' | translate}}" icon="fa-plus"></button>
         </form>
       </div>
     </div>
   </div>
 
-  <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+  <div class="ui-g-12 ui-md-8 ui-md-offset-2">
     <div class="tile">
       <h3>direkt zum Ausleihprotokoll</h3>
       <button pButton type="button" class="ui-button-success" onclick="window.location.href='/protokoll'"
-              label="zum Ausleihprotokoll" icon="fa-angle-double-right" iconPos="right"></button>
+              label="zum Ausleihprotokoll" icon="fa-search"></button>
     </div>
   </div>
 </div>
 
-<div *ngIf="authenticated" class="container">
+<div *ngIf="roles['authenticated']" class="container">
   <div class="ui-g">
     <div class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
@@ -58,7 +58,7 @@
         </button>
       </div>
     </div>
-    <div *ngIf="fachreferent" class="ui-g-12 ui-md-6 ui-lg-3">
+    <div *ngIf="roles['fachreferent']" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
         <h3>Fachref-Assistent</h3>
         <p>Instrumente zum Bestandsmanagement.</p>
@@ -67,7 +67,7 @@
         </button>
       </div>
     </div>
-    <div *ngIf="admin" class="ui-g-12 ui-md-6 ui-lg-3">
+    <div *ngIf="roles['admin']" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
         <h3>Administration</h3>
         <p>Eisntellungen und Nutzer verwalten</p>
@@ -75,7 +75,7 @@
                 label="zur Administration" icon="fa-angle-double-right" iconPos="right"></button>
       </div>
     </div>
-    <div *ngIf="media" class="ui-g-12 ui-md-6 ui-lg-3">
+    <div *ngIf="roles['media']" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
         <h3>Medien-Management</h3>
         <p>Medien-Management</p>
@@ -84,7 +84,7 @@
         </button>
       </div>
     </div>
-    <div *ngIf="analyst" class="ui-g-12 ui-md-6 ui-lg-3">
+    <div *ngIf="roles['analyst']" class="ui-g-12 ui-md-6 ui-lg-3">
       <div class="tile">
         <h3>DuEPublicA</h3>
         <p>DuEPublicA</p>

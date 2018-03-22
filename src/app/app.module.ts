@@ -11,6 +11,7 @@ import {LoginComponent} from './login.component';
 import {AuthentificationService} from './service/authentification.service';
 import {ButtonModule, InputTextModule, MessagesModule} from "primeng/primeng";
 import {UserService} from "./service/user.service";
+import {TranslateModule} from "./translate/translate.module";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {UserService} from "./service/user.service";
     ButtonModule,
     InputTextModule,
     MessagesModule,
+    TranslateModule,
     FormsModule,
     HttpClientModule,
     BrowserModule,
