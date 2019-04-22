@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>{{'settings' | translate}}</h3>
+        <p>{{'settings.short' | translate}}</p>
+
+        <button pButton type="button" class="ui-button-success" routerLink="/usersettings"
+                label="{{'to.settings' | translate}}" icon="fa-user">
+        </button>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>{{'protokoll' | translate}}</h3>
+        <p>{{'protokoll.short' | translate}}</p>
+        <button pButton type="button" class="ui-button-success button-link" onclick="window.location.href='/protokoll'"
+                label="{{'to.protokoll' | translate}}" icon="fa-search">
+        </button>
+      </div>
+    </div>
+    <div *ngIf="hasRole('FACHREFERENT')" class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>{{'fachref' | translate}}</h3>
+        <p>{{'fachref' | translate}}</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/fachref'"
+                label="{{'to.fachref' | translate}}" icon="fa-list">
+        </button>
+      </div>
+    </div>
+    <div *ngIf="hasRole('ADMIN')" class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>{{'admin' | translate}}</h3>
+        <p>{{'admin.short' | translate}}</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/admin'"
+                label="{{'to.admin' | translate}}" icon="fa-user-secret"></button>
+      </div>
+    </div>
+    <div *ngIf="hasRole('MEDIA')" class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>{{'media' | translate}}</h3>
+        <p>{{'media.short' | translate}}</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/media'"
+                label="{{'to.media'| translate}}" icon="fa-cog">
+        </button>
+      </div>
+    </div>
+    <div *ngIf="hasRole('ANALYST')" class="ui-g-12 ui-md-6 ui-lg-3">
+      <div class="tile">
+        <h3>{{'duepublica' | translate}}</h3>
+        <p>{{'duepublica.short' | translate}}</p>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/bibliometrics'"
+                label="{{'to.bibliometrics' | translate}}" icon="fa-chart-bar">
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+      <div class="tile">
+        <h3>Logout</h3>
+        <button pButton type="button" class="ui-button-danger" (click)="logout()" label="Logout"
+                icon="fa-sign-out" iconPos="right"></button>
+      </div>
+    </div>
+  </div>
+</div>

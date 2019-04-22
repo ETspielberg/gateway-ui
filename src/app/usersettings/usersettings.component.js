@@ -72,7 +72,7 @@ var UsersettingsComponent = (function () {
         var _this = this;
         this.usersettings.subjects = this.subjects;
         this.usersettings.substitute = this.substitute;
-        this.userService.create(usersettings).subscribe(function (data) { return _this.router.navigate(['/start']); });
+        this.userService.create(usersettings).subscribe(function (data) { return _this.router.navigate(['/components']); });
     };
     UsersettingsComponent = __decorate([
         core_1.Component({

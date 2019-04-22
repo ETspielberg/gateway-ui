@@ -1,11 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthentificationService} from './service/authentification.service';
-import {Router} from '@angular/router';
-import {User} from './model/User';
-import {Usersettings} from './model/Usersettings';
-import {UserService} from './service/user.service';
-import {Message} from "primeng/primeng";
-import {TranslateService} from "./translate";
+import {AuthenticationService} from '../service/authentication.service';
+import {User} from '../model/User';
+import {Message} from 'primeng/primeng';
+import {TranslateService} from '../translate';
 
 @Component({
   selector: 'app-register',
@@ -13,21 +10,17 @@ import {TranslateService} from "./translate";
 })
 export class RegisterComponent implements OnInit {
 
-  public username: string;
-
-  public password: string;
-
   public passwordCheck: string;
 
-  public usersettings: Usersettings;
+  public user: User;
 
   public messages: Message[];
 
-  constructor(private authentificationService: AuthentificationService, private userService: UserService, private translateService: TranslateService) {
+  constructor(private authenticationService: AuthenticationService, private translateService: TranslateService) {
   }
 
   ngOnInit() {
-   this.usersettings = new Usersettings('', '', '');
+   this.user = new User('', '', '', '');
   }
 
   register() {
@@ -35,21 +28,21 @@ export class RegisterComponent implements OnInit {
     let passwordValid = true;
     let usernameValid = true;
     this.messages = [];
-    if (this.password !== this.passwordCheck) {
+    if (this.user.password !== this.passwordCheck) {
       passwordsMatch = false;
       this.messages.push({
         severity: 'error', summary: this.translateService.instant('error.noMatchingPasswords.summary'),
         detail: this.translateService.instant('error.noMatchingPasswords.detail')
       });
     }
-    if (this.password === undefined) {
+    if (this.user.password === undefined) {
       passwordValid = false;
       this.messages.push({
         severity: 'error', summary: this.translateService.instant('error.noPassword.summary'),
         detail: this.translateService.instant('error.noPassword.detail')
       });
     }
-    if (this.username === undefined) {
+    if (this.user.username === undefined) {
       usernameValid = false;
       this.messages.push({
         severity: 'error', summary: this.translateService.instant('error.noUsername.summary'),
@@ -57,16 +50,8 @@ export class RegisterComponent implements OnInit {
       });
     }
     if (passwordValid && passwordsMatch && usernameValid) {
-      this.authentificationService.register(new User(this.username, this.password)).subscribe(
-        data => {
-          this.usersettings.username = this.username;
-          this.userService.create(this.usersettings).subscribe(
-            () => {
-              this.authentificationService.login(this.username, this.password).subscribe(
-                () => window.location.href = '/');
-            }
-          );
-        },
+      this.authenticationService.register(this.user).subscribe(
+        data => this.authenticationService.login(this.user.username, this.user.password),
         error => {
           this.messages.push({
             severity: 'error', summary: this.translateService.instant('error.register.summary'),

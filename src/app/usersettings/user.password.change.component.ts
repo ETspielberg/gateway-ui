@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Message} from 'primeng/primeng';
 
 @Component({
   selector: 'app-passwordchange',
@@ -11,6 +12,8 @@ export class UserPasswordChangeComponent {
   passwordRepeat: string;
 
   identical: boolean;
+
+  messages: Message[];
 
   changePassword() {
     this.checkPassword();

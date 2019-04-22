@@ -31,4 +31,22 @@ export const LANG_DE_TRANS = {
   'error.login.detail': 'Bitte Nutzerkennung und Passwort prüfen.',
   'error.noPassword.summary': 'Kein Passwort.',
   'error.noPassword.detail': 'Bitte ein Passwort eingeben.',
+  'logout.success': 'Sie haben sich erfolgreich abgemeldet. Vielen Dank für Ihren Besuch.',
+  'to.login': 'zur Anmeldeseite',
+  'good.bye': 'Auf Wiedersehen',
+  'data.protection': 'Datenschutzhinweis',
+  'data.protection.text': 'Wenn Sie die Dienste der Lib-Intel-Plattform nutzen, werden die von Ihnen eingegeben Daten ' +
+  'an uns übermittelt und gespeichert. Zur Verbeserung der Dienste speichern wir zusätzlich Daten über die Anfragen. ' +
+  'Im Rahmen der Auftragsverarbeitung im ELi:SA-Kontext werden Ihre Daten an das Hochschulbibliothekszentrum (hbz) ' +
+  'NRW weitergegeben. Die Daten werden dort ausschließlich für die Verarbeitung der Bestellung verwendet.',
+  'data.protection.link': 'mehr zum Datenschutz an der UB',
+  'to.protokoll': 'zum Ausleihprotokoll',
+  'to.settings': 'zu den Einstellungen',
+  'to.fachref': 'zum Fachref-Assistenten',
+  'to.admin': 'zur Administration',
+  'to.media': 'zum Medien-Management',
+  'to.bibliometrics': 'zu DuEPublicA',
+  'personal.settings': 'Persönliche Einstellungen',
+  'elisa.account': 'ELi:SA-Account',
+  'save': 'Speichern',
 };

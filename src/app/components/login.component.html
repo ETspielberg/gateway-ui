@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+      <div class="tile">
+        <h3>Login</h3>
+        <p-messages [(value)]="messages" [closable]="false"></p-messages>
+        <div class="panel-body">
+          <form (submit)="login()" (keyup.enter)="login()">
+            <div class="form-group">
+            <span class="ui-float-label">
+              <input id="username-input" type="text" size="30" pInputText [(ngModel)]="username"
+                     [ngModelOptions]="{standalone: true}" autofocus
+                     class="form-control">
+              <label for="username-input">{{'username' | translate}}</label>
+            </span>
+            </div>
+            <div class="form-group">
+            <span class="ui-float-label">
+              <input id="password-input" type="password" size="30" pInputText [(ngModel)]="password"
+                     [ngModelOptions]="{standalone: true}" autofocus
+                     class="form-control">
+              <label for="password-input">{{'password' | translate}}</label>
+            </span>
+            </div>
+            <button pButton type="button" class="ui-button-success" label="Login" (click)="login()"
+                    icon="fa-sign-in"></button>
+            <button pButton type="button" class="ui-button" routerLink="/register" label="{{'register' | translate}}"
+                    icon="fa-plus"></button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+      <div class="tile">
+        <h3>{{'protokoll' | translate}}</h3>
+        <button pButton type="button" class="ui-button-success" onclick="window.location.href='/protokoll'"
+                label="zum Ausleihprotokoll" icon="fa-search"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
