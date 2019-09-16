@@ -8,7 +8,7 @@
           <form (submit)="register()">
             <div class="form-group">
       <span class="ui-float-label">
-              <input id="username-input" type="text" size="30" pInputText [(ngModel)]="user.username"
+              <input id="username-input" type="text" size="30" pInputText [(ngModel)]="user.name"
                      [ngModelOptions]="{standalone: true}" autofocus
                      class="form-control">
               <label for="username-input">{{'username' | translate}}</label>
@@ -33,7 +33,7 @@
             <hr/>
             <div class="form-group">
       <span class="ui-float-label">
-              <input id="password-input" type="password" size="30" pInputText [(ngModel)]="user.password"
+              <input id="password-input" type="password" size="30" pInputText [(ngModel)]="password"
                      [ngModelOptions]="{standalone: true}"
                      class="form-control">
               <label for="password-input">{{'password' | translate}}</label>

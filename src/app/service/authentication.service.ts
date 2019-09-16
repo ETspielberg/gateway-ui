@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Principal} from '../model/Principal';
 import {Observable} from 'rxjs/Observable';
-import {User} from '../model/User';
 
 @Injectable()
 export class AuthenticationService {
@@ -11,33 +10,31 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {
   }
 
-  public principal: Principal;
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  public user: User;
+  public principal: Principal;
 
   login(username: string, password: string): void {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    this.http.post('/libintelLogin', 'username=' + username + '&password=' + password, {headers: headers, responseType: 'text', observe: 'response'})
-      .subscribe(response => {
-        console.log(response.headers.getAll('redirecturl'));
-        window.location.href = response.headers.getAll('redirecturl')[0];
-      });
+    this.http.post('/libintelLogin', 'username=' + username + '&password=' + password,
+      {headers: headers, responseType: 'text', observe: 'response'})
+      .subscribe(response =>
+        window.location.href = response.headers.getAll('redirecturl')[0]
+      );
   }
 
   logout(): Observable<string> {
     this.principal = null;
-    this.user = null;
     return this.http.post('/logout', {}, {responseType: 'text'});
   }
 
-  register(user: User): Observable<string> {
-    const map: Map<string, string> = new Map<string, string>();
-    map.set('username', user.username);
-    map.set('password', user.password);
-    map.set('email', user.email);
-    map.set('fullname', user.fullname);
-    return this.http.post('/newUser',
-      map, {responseType: 'text'});
+  register(user: Principal, password: string): Observable<string> {
+    const map = {};
+    map['username'] = user.name;
+    map['password'] = password;
+    map['email'] = user.email;
+    map['fullname'] = user.fullname;
+    return this.http.post('/newUser', map, {headers: this.headers, responseType: 'text', observe: 'body'});
   }
 
   updatePrincipal(): Observable<Principal> {
@@ -45,9 +42,6 @@ export class AuthenticationService {
     observable.subscribe(
       data => {
           this.principal = data;
-          if (this.principal !== null) {
-            this.user = new User(this.principal.name, this.principal.email, this.principal.fullname);
-          }
       },
     );
     return observable;
@@ -59,12 +53,18 @@ export class AuthenticationService {
     );
   }
 
-  updateUser(user: User): Observable<User> {
-    const map: Map<string, string> = new Map<string, string>();
-    map.set('email', user.email);
-    map.set('fullname', user.fullname);
-    map.set('username', user.username);
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.put<User>('/updateCurrentUser', JSON.stringify(user), {headers: headers});
+  updateUser(user: Principal): Observable<Principal> {
+    const map = {};
+    map['email'] = user.email;
+    map['fullname'] = user.fullname;
+    map['username'] = user.name;
+    return this.http.put<Principal>('/updateCurrentUser', map, {headers: this.headers});
+  }
+
+  updatePassword(oldPassword: string, newPassword: string) {
+    const map = {};
+    map['newPassword'] = newPassword;
+    map['oldPassword'] = oldPassword;
+    return this.http.post('/updatePassword', map, {headers: this.headers});
   }
 }

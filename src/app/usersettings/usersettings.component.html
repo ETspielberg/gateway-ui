@@ -1,10 +1,11 @@
 <div class="container">
   <div *ngIf="user" class="ui-g">
-    <div class="ui-g-12 ui-md-6 ui-md-offset-3">
+    <p-messages [(value)]="messages" [closable]="false"></p-messages>
+    <div class="ui-g-12 ui-md-6">
       <div class="tile">
         <h3 class="sub-header">{{'personal.settings' | translate}}</h3>
         <div class="panel-body">
-          <form (submit)="save()">
+          <form (submit)="updateUser()">
             <div class="form-group">
               <label for="fullname-input">{{'fullname' | translate}}</label>
               <input id="fullname-input" type="text" size="30" pInputText [(ngModel)]="user.fullname"
@@ -14,19 +15,53 @@
             <div class="form-group">
               <label for="email-input">{{'email' | translate}}</label>
               <input id="email-input" type="text" size="30" pInputText [(ngModel)]="user.email"
-                     [ngModelOptions]="{standalone: true}" autofocus
+                     [ngModelOptions]="{standalone: true}"
                      class="form-control">
 
             </div>
             <div class="form-group">
               <label for="elisa-input">{{'elisa.account' | translate}}</label>
-              <input id="elisa-input" type="text" size="30" pInputText [(ngModel)]="user.elisa"
-                     [ngModelOptions]="{standalone: true}" autofocus
+              <input id="elisa-input" type="text" size="30" pInputText [(ngModel)]="elisa"
+                     [ngModelOptions]="{standalone: true}"
                      class="form-control">
 
             </div>
             <button pButton type="button" class="ui-button-success" icon="fa-save" label="{{'save' | translate}}"
                     (click)="updateUser()"></button>
+            <button pButton type="button" class="ui-button-danger" icon="fa-arrow-left" label="{{'back' | translate}}"
+                    routerLink="/start"></button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <div class="tile">
+        <h3 class="sub-header">{{'change.password' | translate}}</h3>
+        <div class="panel-body">
+          <form (submit)="updatePassword()">
+            <div class="form-group">
+              <label for="oldPassword">{{'oldPassword' | translate}}</label>
+              <input id="oldPassword" type="password" size="30" pInputText [(ngModel)]="oldPassword"
+                     [ngModelOptions]="{standalone: true}"
+                     class="form-control">
+            </div>
+            <hr />
+            <div class="form-group">
+              <label for="newPassword">{{'Password' | translate}}</label>
+              <input id="newPassword" type="password" size="30" pInputText [(ngModel)]="newPassword"
+                     [ngModelOptions]="{standalone: true}"
+                     class="form-control">
+
+            </div>
+            <div class="form-group">
+              <label for="newPasswordCheck">{{'PasswordCheck' | translate}}</label>
+              <input id="newPasswordCheck" type="password" size="30" pInputText [(ngModel)]="newPasswordCheck"
+                     [ngModelOptions]="{standalone: true}"
+                     class="form-control">
+
+            </div>
+            <button pButton type="button" class="ui-button-success" icon="fa-save" label="{{'save' | translate}}"
+                    (click)="updatePassword()"></button>
             <button pButton type="button" class="ui-button-danger" icon="fa-arrow-left" label="{{'back' | translate}}"
                     routerLink="/start"></button>
           </form>

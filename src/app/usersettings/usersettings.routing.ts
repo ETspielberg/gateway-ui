@@ -1,12 +1,10 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {UsersettingsComponent} from './usersettings.component';
-import {UserPasswordChangeComponent} from './user.password.change.component';
 
 
 const routes: Routes = [
-  { path : '', component: UsersettingsComponent },
-  { path : 'passwordchange', component : UserPasswordChangeComponent}
+  { path : '', component: UsersettingsComponent }
 ];
 
 export const usersettingsRouting: ModuleWithProviders = RouterModule.forChild(routes);

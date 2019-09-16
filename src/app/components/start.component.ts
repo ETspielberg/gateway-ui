@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthenticationService} from '../service/authentication.service';
 import {Router} from '@angular/router';
 
@@ -12,7 +12,14 @@ export class StartComponent {
   }
 
   hasRole(role: string) {
-    return this.authenticationService.principal.roles && (this.authenticationService.principal.roles.indexOf('ROLE_' + role.toUpperCase()) > -1);
+    if (this.authenticationService.principal) {
+      if (this.authenticationService.principal.roles) {
+        if (this.authenticationService.principal.roles.indexOf('ROLE_' + role.toUpperCase()) > -1) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   logout() {
@@ -20,5 +27,4 @@ export class StartComponent {
       data => this.router.navigate(['/goodbye'])
     );
   }
-
 }
